@@ -1,10 +1,10 @@
 const readline = require('readline')
 const currency = require('currency-formatter')
 
-var input = readline.createInterface(process.stdin, process.stdout)
+var rl = readline.createInterface(process.stdin, process.stdout)
 
 const hitungOngkir = ()=> {
-  input.question('Input Jarak (km) : ', (jarak)=> {
+  rl.question('Input Jarak (km) : ', (jarak)=> {
     if(jarak <= 2){
       var ongkir = 8000
     } else {
@@ -19,4 +19,39 @@ const hitungOngkir = ()=> {
   })
 }
 
-hitungOngkir()
+const loop = ()=> {
+  let run = true
+  while(run) {
+    try{
+      hitungOngkir()
+    }catch(error){
+      run = false
+      console.log('exit')
+    }
+  }
+  rl.close()
+}
+
+const a = (b) => {
+  return new Promise((resolve, reject)=> {
+    try{
+      if (jarak.toLowerCase() === 'q') {
+        throw new Error('quit')
+      }
+      resolve(b)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+
+const app = async ()=> {
+  try {
+    await a(loop())    
+  } catch(err) { 
+    console.log(err.message)
+  }
+}
+
+app()
